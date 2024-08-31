@@ -1,0 +1,143 @@
+
+$bgColor--1: #93cede;
+$bgColor--2: #49a5bf;
+
+// icon wrapper
+$sizeIcon: 200px;
+$sizeRadius: 45px;
+
+// background icon
+$iconColor--1: #ffffff;
+$iconColor--2: #f7f7f7;
+
+// color balls
+$ballColor: #c1595a;
+
+// size balls
+$sizeBall--1: 25px;
+$sizeBall--2: 40px;
+$sizeBall--3: 55px;
+
+// center balls
+$center: 44%;
+
+// range balls
+$rangeBall-randomA--1: translate(
+	-#{randomNum(6, 10)}px,
+	#{randomNum(27, 35)}px
+);
+$rangeBall-randomA--2: translate(
+	-#{randomNum(30, 35)}px,
+	-#{randomNum(5, 10)}px
+);
+$rangeBall-randomA--3: translate(
+	#{randomNum(1, 10)}px,
+	-#{randomNum(30, 40)}px
+);
+// ---------------------------------------------------------------------
+$rangeBall-randomB--1: translate(
+	-#{randomNum(6, 10)}px,
+	#{randomNum(27, 35)}px
+);
+$rangeBall-randomB--2: translate(
+	-#{randomNum(30, 35)}px,
+	-#{randomNum(5, 10)}px
+);
+$rangeBall-randomB--3: translate(
+	#{randomNum(1, 10)}px,
+	-#{randomNum(30, 40)}px
+);
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+svg {
+	display: none;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	background: $bgColor--1;
+	background: linear-gradient(135deg, $bgColor--1 0%, $bgColor--2 100%);
+}
+
+.gooey-icon {
+	position: absolute;
+	width: $sizeIcon;
+	height: $sizeIcon;
+	top: 50%;
+	left: 50%;
+	margin-top: -$sizeIcon/2;
+	margin-left: -$sizeIcon/2;
+	border-radius: $sizeRadius;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	background: $iconColor--1;
+	background: linear-gradient(135deg, $iconColor--1 0%, $iconColor--2 100%);
+}
+
+.gooey-wrapper {
+	display: inline-block;
+	filter: url("#gooey");
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+
+	.gooey-ball {
+		position: absolute;
+		border-radius: 50%;
+	}
+}
+
+.gooey-animation {
+	.gooey-ball {
+		background: $ballColor;
+		transform: translate(0, 0);
+		left: $center;
+		top: $center;
+		animation: move-to-center-1 ease-in-out 2s infinite alternate;
+
+		&:nth-child(1) {
+			animation-name: move-ball-1;
+			transform: $rangeBall-randomA--1;
+			width: $sizeBall--1;
+			height: $sizeBall--1;
+		}
+
+		&:nth-child(2) {
+			animation-name: move-ball-2;
+			animation-delay: 0.1s;
+			transform: $rangeBall-randomA--2;
+			width: $sizeBall--2;
+			height: $sizeBall--2;
+		}
+
+		&:nth-child(3) {
+			animation-name: move-ball-3;
+			animation-delay: 0.2s;
+			transform: $rangeBall-randomA--3;
+			width: $sizeBall--3;
+			height: $sizeBall--3;
+		}
+	}
+
+	@keyframes move-ball-1 {
+		to {
+			transform: $rangeBall-randomB--1;
+		}
+	}
+	@keyframes move-ball-2 {
+		to {
+			transform: $rangeBall-randomB--2;
+		}
+	}
+	@keyframes move-ball-3 {
+		to {
+			transform: $rangeBall-randomB--3;
+		}
+	}
+}
